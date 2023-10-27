@@ -5,6 +5,7 @@ function SignUp() {
 
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(null);
   const navigate = useNavigate();
 
@@ -16,7 +17,9 @@ function SignUp() {
   };
 
   const handleSubmit = async (e) => {
+    // prevents the default behavior of the event
     e.preventDefault();
+
     try {
       setLoading(true);
       const res = await fetch("/api/auth/signup", {
@@ -28,17 +31,24 @@ function SignUp() {
       });
       const data = await res.json();
       console.log(data);
-      if (!data.ok) {
+      
+      // if error occured while creating user
+      if (data.success === false) {
         setLoading(false);
         setError(data.message);
+        setSuccess(null);
         return;
       }
+      // if no error
       setLoading(false);
       setError(null);
+      setSuccess(true);
       navigate("/sign-in");
     } catch (error) {
+      // catch the error while fetching the signup page
       setLoading(false);
       setError(error.message);
+      setSuccess(null);
     }
   };
 
@@ -84,6 +94,7 @@ function SignUp() {
         </Link>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
+      {success && <p className="text-green-500 mt-5">Registered Successfully</p>}
     </div>
   );
 }
