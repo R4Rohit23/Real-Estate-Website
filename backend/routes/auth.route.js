@@ -27,13 +27,17 @@ router.post("/signin", async (req, res, next) => {
     const validUser = await User.findOne({ email });
 
     if (!validUser) {
-      return res.status(404).json({ message: "User Not Found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User Not Found" });
     }
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
 
     if (!validPassword) {
-      return res.status(401).json({ message: "Invalid Credential" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid Credential" });
     }
 
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
