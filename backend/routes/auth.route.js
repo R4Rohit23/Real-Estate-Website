@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 
 // SIGN-UP Router
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res, next) => {
   const { username, email, password } = req.body;
   // Encrypting the password
   const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -15,7 +15,7 @@ router.post("/signup", async (req, res) => {
     await newUser.save();
     res.status(201).json("User Created Successfully");
   } catch (err) {
-    res.status(550).json({ message: err.message});
+    res.status(550).json({ message: 'Account already exists'});
   }
 });
 
