@@ -14,7 +14,7 @@ function Header() {
         </Link>
         <form className="bg-slate-100 p-3 rounded-lg flex items-center">
           <input
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
+            className="bg-transparent focus:outline-none w-34 sm:w-64"
             type="text"
             placeholder="Search..."
           />

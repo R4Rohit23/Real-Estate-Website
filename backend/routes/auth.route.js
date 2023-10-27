@@ -2,6 +2,7 @@ import express from "express";
 import User from "../models/user.model.js";
 const router = express.Router();
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/error.js";
 
 // SIGN-UP Router
 router.post("/signup", async (req, res) => {
@@ -14,7 +15,7 @@ router.post("/signup", async (req, res) => {
     await newUser.save();
     res.status(201).json("User Created Successfully");
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(550).json({ message: err.message});
   }
 });
 
