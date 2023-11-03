@@ -5,7 +5,7 @@ export const verifyToken = (req, res, next) => {
     const token = req.cookies.access_token;
 
     if (!token) {
-        return res.status(401).json({ message: "Unauthorized access"});
+        return res.status(401).json({ success: false, message: "Unauthorized access"});
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {

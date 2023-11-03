@@ -5,9 +5,12 @@ import User from "../models/user.model.js";
 
 const router = express.Router();
 
-export const updateUser = async (req, res, next) => {
-  if (req.user.id !== req.params.id)
-    return res.status(401).json("Invalid Credential!");
+export const updateUser = async (req, res) => {
+  if (req.user.id !== req.params.id) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid Credential" });
+  }
 
   try {
     if (req.body.password) {
@@ -30,7 +33,9 @@ export const updateUser = async (req, res, next) => {
     const { password, ...rest } = updatedUser._doc;
     res.status(200).json(rest);
   } catch (err) {
-    next(err);
+    return res
+      .staus(501)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };
 

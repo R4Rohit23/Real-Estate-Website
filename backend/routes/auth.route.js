@@ -2,7 +2,6 @@ import express, { json } from "express";
 import User from "../models/user.model.js";
 const router = express.Router();
 import bcryptjs from "bcryptjs";
-import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 // SIGN-UP Router

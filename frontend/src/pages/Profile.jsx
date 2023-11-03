@@ -8,9 +8,18 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import {
+  updateUserError,
+  updateUserStart,
+  updateUserSuccess,
+} from "../redux/user/user.slice";
+import { useDispatch } from "react-redux";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
+  const { error, loading} = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   // useRef is used to store a mutable value that does not cause a re-render when updated.
   // It can be used to access a DOM element directly.
@@ -20,10 +29,7 @@ function Profile() {
   const [fileUploadProgress, setFileUploadProgress] = useState(null);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-
-  console.log(formData);
-  console.log(fileUploadProgress);
-  console.log(fileUploadError);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (file) {
@@ -60,10 +66,42 @@ function Profile() {
     );
   };
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch(updateUserStart());
+
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(updateUserError(data.message));
+        return;
+      }
+
+      dispatch(updateUserSuccess(data));
+      setSuccess(true);
+    } catch (error) {
+      dispatch(updateUserError(error.message));
+    }
+  };
+
   return (
     <div className="p-4 mx-auto max-w-xl">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           onChange={(e) => setFile(e.target.files[0])}
           type="file"
@@ -95,32 +133,40 @@ function Profile() {
             ""
           )}
         </p>
+        <span></span>
         <input
           type="text"
           id="username"
           placeholder="Username"
+          defaultValue={currentUser.username}
+          onChange={handleChange}
           className="border p-3 rounded-lg mt-3"
         />
         <input
           type="email"
           placeholder="Email"
           id="email"
+          defaultValue={currentUser.email}
+          onChange={handleChange}
           className="border p-3 rounded-lg mt-3"
         />
         <input
           type="password"
           placeholder="Password"
           id="password"
+          onChange={handleChange}
           className="border p-3 rounded-lg mt-3"
         />
-        <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
-          Update
+        <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
+          {loading ? "Loading..." : "Update"}
         </button>
       </form>
       <div className="flex justify-between mt-5">
         <span className="text-red-700 cursor-pointer">Delete Account</span>
         <span className="text-red-700 cursor-pointer">Sign Out</span>
       </div>
+      {error && <p className="text-red-500 mt-5">{error}</p>}
+      {success && <p className="text-green-500 mt-5">Updated Successfully</p>}
     </div>
   );
 }
