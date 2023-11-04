@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import {
@@ -160,9 +160,11 @@ function Profile() {
           hidden
           accept="image/*"
         />
+
+        {/* Profile Image */}
         <div className="relative inline-block mx-auto">
           <img
-            className="rounded-full h-24 w-24 shadow-xl object-cover self-center mt-2"
+            className="rounded-full h-24 w-24 shadow-2xl object-cover self-center mt-2"
             src={formData.avatar || currentUser.avatar}
             alt="profile_image"
           />
@@ -173,6 +175,8 @@ function Profile() {
             <FaPencilAlt />
           </div>
         </div>
+
+        {/* Uploading or error bar */}
         <p className="text-sm self-center">
           {fileUploadError ? (
             <span className="text-red-700">Error Uploading Image</span>
@@ -185,13 +189,15 @@ function Profile() {
           )}
         </p>
         <span></span>
+
+        {/* User Data Section  */}
         <input
           type="text"
           id="username"
           placeholder="Username"
           defaultValue={currentUser.username}
           onChange={handleChange}
-          className="border p-3 rounded-lg mt-3"
+          className="border p-3 rounded-lg mt-3 shadow-lg"
         />
         <input
           type="email"
@@ -199,22 +205,27 @@ function Profile() {
           id="email"
           defaultValue={currentUser.email}
           onChange={handleChange}
-          className="border p-3 rounded-lg mt-3"
+          className="border p-3 rounded-lg mt-3 shadow-lg"
         />
         <input
           type="password"
           placeholder="Password"
           id="password"
           onChange={handleChange}
-          className="border p-3 rounded-lg mt-3"
+          className="border p-3 rounded-lg mt-3 shadow-lg"
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 font-semibold hover:shadow-lg"
         >
           {loading ? "Loading..." : "Update"}
         </button>
+
+        <Link className="bg-green-700 p-3 rounded-lg text-white uppercase text-center font-semibold hover:opacity-90 hover:shadow-lg" to={"/create-listing"}>
+            Create Listing
+        </Link>
       </form>
+
       <div className="flex justify-between mt-5">
         <span
           onClick={handleUserDelete}

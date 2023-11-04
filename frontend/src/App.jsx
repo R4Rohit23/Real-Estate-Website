@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import PrivateRoute from "./components/PrivateRoute";
 import { useTheme } from "./context/ThemeContext";
+import CreateListing from "./pages/CreateListing.jsx";
 
 function App() {
   const { isDarkTheme } = useTheme();
@@ -29,10 +30,8 @@ function App() {
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route element={<PrivateRoute />}>
-                  {" "}
-                  {/* Parent Route */}
-                  <Route path="/profile" element={<Profile />} />{" "}
-                  {/* Child Route */}
+                  <Route path="/profile" element={<Profile />}/>
+                  <Route path="/create-listing" element={<CreateListing />} />
                 </Route>
               </Routes>
           </BrowserRouter>

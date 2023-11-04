@@ -13,7 +13,7 @@ function Header() {
     <header className="bg-slate-200 shadow-xl dark:bg-black">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
+          <h1 className="font-bold text-lg sm:text-xl flex flex-wrap">
             <span className="text-slate-500 dark:text-white">Skyline</span>
             <span className="text-slate-700 dark:text-slate-400">Estate</span>
           </h1>
@@ -27,7 +27,7 @@ function Header() {
           />
           <FaSearch />
         </form>
-        <ul className="flex gap-6">
+        <ul className="flex gap-2 sm:gap-10">
         <DarkModeSwitch 
           checked={isDarkTheme}
           onChange={toggleTheme}
