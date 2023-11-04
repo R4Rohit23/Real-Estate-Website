@@ -101,8 +101,17 @@ router.post("/google", async (req, res) => {
         .json(rest);
     }
   } catch (error) {
-    return res.status(500).json({ message: 'Error Creating User'});
+    return res.status(500).json({ message: "Error Creating User" });
     console.log(error);
+  }
+});
+
+router.get("/signout", async (req, res) => {
+  try {
+    res.clearCookie("access_token");
+    res.status(200).json({ message: "User Has been Signed out" });
+  } catch (error) {
+    res.status(501).json({ success: false, message: "Internal Server Error" });
   }
 });
 
