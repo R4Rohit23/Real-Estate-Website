@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 
 const router = express.Router();
 
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   if (req.user.id !== req.params.id) {
     return res
       .status(401)
@@ -39,7 +39,27 @@ export const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  if (req.user.id !== req.params.id) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid Credential" });
+  }
+
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.clearCookie('access_token');
+    res.status(200).json({ message: "User Deleted Successfully" });
+  } catch (error) {
+    return res
+      .staus(501)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 // Both the function will be run on the POST request on the /update endpoint
 router.post("/update/:id", verifyToken, updateUser);
+
+router.delete("/delete/:id", verifyToken, deleteUser);
 
 export default router;

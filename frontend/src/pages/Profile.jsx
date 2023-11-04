@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import {
@@ -12,14 +13,17 @@ import {
   updateUserError,
   updateUserStart,
   updateUserSuccess,
+  deleteUserFailure,
+  deleterUserSuccess
 } from "../redux/user/user.slice";
 import { useDispatch } from "react-redux";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
-  const { error, loading} = useSelector((state) => state.user);
+  const { error, loading } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // useRef is used to store a mutable value that does not cause a re-render when updated.
   // It can be used to access a DOM element directly.
@@ -98,6 +102,28 @@ function Profile() {
     }
   };
 
+  const handleUserDelete = async (e) => {
+    const response = confirm("Do you want to delete your account?");
+
+    if (response) {
+      try {
+          const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+            method: "DELETE",
+          });
+
+          const data = await res.json();
+
+          if (data.success === false) {
+            dispatch(deleteUserFailure(data.message));
+            return;
+          }
+          dispatch(deleterUserSuccess());
+      } catch (error) {
+        dispatch(deleteUserFailure(error.message));
+      }
+    }
+  };
+
   return (
     <div className="p-4 mx-auto max-w-xl">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -157,12 +183,20 @@ function Profile() {
           onChange={handleChange}
           className="border p-3 rounded-lg mt-3"
         />
-        <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
+        <button
+          disabled={loading}
+          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+        >
           {loading ? "Loading..." : "Update"}
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer">Delete Account</span>
+        <span
+          onClick={handleUserDelete}
+          className="text-red-700 cursor-pointer"
+        >
+          Delete Account
+        </span>
         <span className="text-red-700 cursor-pointer">Sign Out</span>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
