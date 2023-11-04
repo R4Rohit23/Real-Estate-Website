@@ -61,6 +61,7 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+// Google OAuth Router
 router.post("/google", async (req, res) => {
   try {
     // check if user is present or not
@@ -106,6 +107,7 @@ router.post("/google", async (req, res) => {
   }
 });
 
+// SignOut Router
 router.get("/signout", async (req, res) => {
   try {
     res.clearCookie("access_token");
