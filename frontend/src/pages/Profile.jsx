@@ -150,8 +150,9 @@ function Profile() {
   }
 
   return (
-    <div className="p-4 mx-auto max-w-xl">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
+    <div className="dark:bg-slate-600">
+    <div className="p-4 mx-auto max-w-xl ">
+      <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">Profile</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           onChange={(e) => setFile(e.target.files[0])}
@@ -216,7 +217,7 @@ function Profile() {
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 font-semibold hover:shadow-lg"
+          className="bg-slate-700 dark:bg-slate-900 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 font-semibold hover:shadow-lg"
         >
           {loading ? "Loading..." : "Update"}
         </button>
@@ -229,14 +230,15 @@ function Profile() {
       <div className="flex justify-between mt-5">
         <span
           onClick={handleUserDelete}
-          className="text-red-700 cursor-pointer"
+          className="text-red-700 cursor-pointer dark:text-red-500"
         >
           Delete Account
         </span>
-        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">Sign Out</span>
+        <span onClick={handleSignOut} className="text-red-700 dark:text-red-500 cursor-pointer">Sign Out</span>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
       {success && <p className="text-green-500 mt-5">Updated Successfully</p>}
+    </div>
     </div>
   );
 }

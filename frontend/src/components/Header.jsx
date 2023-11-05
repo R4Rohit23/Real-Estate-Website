@@ -10,7 +10,7 @@ function Header() {
   const { isDarkTheme, toggleTheme } = useTheme();
 
   return (
-    <header className="bg-slate-200 shadow-xl dark:bg-black">
+    <header className="bg-slate-200 shadow-lg dark:bg-black">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-lg sm:text-xl flex flex-wrap">
