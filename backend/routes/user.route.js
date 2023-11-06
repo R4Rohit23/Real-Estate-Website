@@ -75,10 +75,30 @@ const getUserListings = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User Not Found" });
+    }
+
+    const { password: pass, ...rest } = user._doc;
+    return res.status(200).json(rest);
+  } catch (error) {
+    return res
+      .status(501)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 // Both the function will be run on the POST request on the /update endpoint
 router.post("/update/:id", verifyToken, updateUser);
 
 router.delete("/delete/:id", verifyToken, deleteUser);
 router.get("/listings/:id", verifyToken, getUserListings);
+router.get("/:id", verifyToken, getUser);
 
 export default router;

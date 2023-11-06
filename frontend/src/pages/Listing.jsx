@@ -122,7 +122,9 @@ function Listing() {
             </div>
 
             <p className="text-slate-800 dark:text-slate-300">
-              <span className="font-semibold text-black dark:text-white">Description - </span>
+              <span className="font-semibold text-black dark:text-white">
+                Description -{" "}
+              </span>
               {listing.description}
             </p>
 
@@ -151,7 +153,7 @@ function Listing() {
             {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
-                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-90 p-3 dark:bg-slate-900"
               >
                 Contact landlord
               </button>
