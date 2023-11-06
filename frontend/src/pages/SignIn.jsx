@@ -10,7 +10,7 @@ import OAuth from "../components/OAuth";
 
 function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error, success } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -43,7 +43,6 @@ function SignIn() {
         return;
       }
       // if no error
-      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
       // catch the error while fetching the signup page
@@ -77,7 +76,7 @@ function SignIn() {
         >
           {loading ? "Loading..." : "Sign IN"}
         </button>
-        <OAuth/>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5">
         <p>Don't have an account?</p>
@@ -86,7 +85,6 @@ function SignIn() {
         </Link>
       </div>
       {error && <p className="text-red-500 mt-5">{error}</p>}
-      {success && <p className="text-green-500 mt-5">Signed in Successfully</p>}
     </div>
   );
 }
