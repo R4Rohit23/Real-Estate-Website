@@ -18,7 +18,7 @@ const createListing = async (req, res) => {
 
 const deleteListing = async (req, res) => {
   const listing = await Listing.findById(req.params.id);
-    console.log(listing);
+
   if (!listing) {
     return res
       .status(404)
@@ -43,10 +43,42 @@ const deleteListing = async (req, res) => {
   }
 };
 
+const updateListing = async (req, res) => {
+  const listing = await Listing.findById(req.params.id);
+
+  if (!listing) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Listing not found" });
+  }
+
+  if (req.user.id !== listing.userRef) {
+    return res
+      .status(403)
+      .json({ success: false, message: "Invalid Credential" });
+  }
+
+  try {
+    const updatedListing = await Listing.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedListing);
+  } catch (error) {
+    return res
+      .status(501)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 // API to crate a listing
 router.post("/create", verifyToken, createListing);
 
 // API to delete the listing
 router.delete("/delete/:id", verifyToken, deleteListing);
+
+// API to update listing
+router.post("/update/:id", verifyToken, updateListing);
 
 export default router;
