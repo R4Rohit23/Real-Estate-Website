@@ -307,7 +307,7 @@ function CreateListing() {
                   type="number"
                   id="regularPrice"
                   min={"50"}
-                  max={"100000"}
+                  max={"100000000"}
                   className="p-3 border border-gray-300 rounded-lg shadow-lg"
                   onChange={handleChange}
                   value={formData.regularPrice}
