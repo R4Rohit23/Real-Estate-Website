@@ -14,6 +14,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import PrivateRoute from "./components/PrivateRoute";
 import { useTheme } from "./context/ThemeContext";
 import CreateListing from "./pages/CreateListing.jsx";
+import UpdateListing from "./pages/UpdateListing.jsx";
 
 function App() {
   const { isDarkTheme } = useTheme();
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<PrivateRoute />}>
                   <Route path="/profile" element={<Profile />}/>
                   <Route path="/create-listing" element={<CreateListing />} />
+                  <Route path="/update-listing/:id" element={<UpdateListing />} />
                 </Route>
               </Routes>
           </BrowserRouter>

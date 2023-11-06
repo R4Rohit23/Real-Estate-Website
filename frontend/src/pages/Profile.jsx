@@ -342,9 +342,11 @@ function Profile() {
                   >
                     Delete
                   </button>
+                  <Link to={`/update-listing/${listing._id}`}>
                   <button className="uppercase text-green-700 hover:underline dark:text-green-500">
                     Edit
                   </button>
+                  </Link>
                 </div>
                 {listingDeleteError && alert(listingDeleteError)}
               </div>

@@ -72,6 +72,19 @@ const updateListing = async (req, res) => {
   }
 };
 
+const getListing = async (req, res) => {
+  try {
+    const listing = await Listing.findById(req.params.id);
+
+    if (!listing) {
+      return res.status(404).json({ message: "Listing Not Found" });
+    }
+    res.status(200).json(listing);
+  } catch (error) {
+    return res.status(403).json({ message: "Internal Error" });
+  }
+};
+
 // API to crate a listing
 router.post("/create", verifyToken, createListing);
 
@@ -80,5 +93,8 @@ router.delete("/delete/:id", verifyToken, deleteListing);
 
 // API to update listing
 router.post("/update/:id", verifyToken, updateListing);
+
+// API to get the listings
+router.get("/get/:id", getListing);
 
 export default router;
