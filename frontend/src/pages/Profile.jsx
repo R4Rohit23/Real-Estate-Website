@@ -197,7 +197,7 @@ function Profile() {
     }
   };
   return (
-    <div className="dark:bg-slate-600">
+    <div className="dark:bg-slate-600 min-h-screen">
       <div className="p-4 mx-auto max-w-xl ">
         <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">
           Profile

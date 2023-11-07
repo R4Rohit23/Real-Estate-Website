@@ -54,7 +54,7 @@ function Listing() {
   }, [params.id]);
 
   return (
-    <main className="dark:bg-slate-600">
+    <main className="dark:bg-slate-600 min-h-screen">
       {loading && (
         <p className="text-center my-7 text-2xl dark:text-white">Loading...</p>
       )}

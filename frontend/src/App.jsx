@@ -17,6 +17,7 @@ import CreateListing from "./pages/CreateListing.jsx";
 import UpdateListing from "./pages/UpdateListing.jsx";
 import Listing from "./pages/Listing.jsx";
 import NotFound from "./pages/404_NotFound.jsx";
+import Search from "./pages/Search.jsx";
 
 function App() {
   const { isDarkTheme } = useTheme();
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/listing/:id" element={<Listing />} />
                 <Route path="/404-not-found" element={<NotFound />} />
+                <Route path="/search" element={<Search />} />
                 <Route element={<PrivateRoute />}>
                   <Route path="/profile" element={<Profile />}/>
                   <Route path="/create-listing" element={<CreateListing />} />

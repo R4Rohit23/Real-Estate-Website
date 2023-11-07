@@ -177,8 +177,8 @@ function CreateListing() {
   };
 
   return (
-    <div className="dark:bg-slate-600">
-      <main className="p-4 max-w-4xl mx-auto">
+    <div className="dark:bg-slate-600 min-h-screen">
+      <main className="p-4 max-w-4xl mx-auto pt-10">
         <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">
           Create a Listing
         </h1>
