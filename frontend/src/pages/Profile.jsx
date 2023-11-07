@@ -197,7 +197,7 @@ function Profile() {
     }
   };
   return (
-    <div className="dark:bg-slate-600 min-h-screen">
+    <div className="dark:bg-slate-800 min-h-screen">
       <div className="p-4 mx-auto max-w-xl ">
         <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">
           Profile
@@ -268,13 +268,13 @@ function Profile() {
           />
           <button
             disabled={loading}
-            className="bg-slate-700 dark:bg-slate-900 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 font-semibold hover:shadow-lg"
+            className="bg-slate-700 dark:bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 font-semibold hover:shadow-lg dark:hover:shadow-slate-950"
           >
             {loading ? "Loading..." : "Update"}
           </button>
 
           <Link
-            className="bg-green-700 p-3 rounded-lg text-white uppercase text-center font-semibold hover:opacity-90 hover:shadow-lg"
+            className="bg-green-700 dark:hover:shadow-slate-950 p-3 rounded-lg text-white uppercase text-center font-semibold hover:opacity-90 hover:shadow-lg"
             to={"/create-listing"}
           >
             Create Listing

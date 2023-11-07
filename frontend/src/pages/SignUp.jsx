@@ -53,14 +53,14 @@ function SignUp() {
   };
 
   return (
-    <div className="min-h-screen dark:bg-slate-600">
+    <div className="min-h-screen dark:bg-slate-800">
       <div className="p-3 max-w-lg mx-auto pt-20">
         <h1 className="text-3xl text-center font-semibold my-7 dark:text-white">Sign Up</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             type="text"
             placeholder="Username"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg dark:hover:shadow-slate-950 shadow-lg hover:shadow-slate-500"
             id="username"
             onChange={handleChange}
           />
@@ -68,7 +68,7 @@ function SignUp() {
           <input
             type="email"
             placeholder="Email"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg dark:hover:shadow-slate-950 shadow-lg hover:shadow-slate-500"
             id="email"
             onChange={handleChange}
           />
@@ -76,14 +76,14 @@ function SignUp() {
           <input
             type="password"
             placeholder="Password"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg dark:hover:shadow-slate-950 shadow-lg hover:shadow-slate-500"
             id="password"
             onChange={handleChange}
           />
 
           <button
             disabled={loading}
-            className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 dark:bg-slate-800"
+            className="bg-slate-600 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 dark:bg-slate-600 dark:hover:shadow-slate-950 shadow-lg"
           >
             {loading ? "Loading..." : "Sign UP"}
           </button>

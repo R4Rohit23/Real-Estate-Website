@@ -16,6 +16,7 @@ export default function Search() {
 
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -49,9 +50,17 @@ export default function Search() {
 
     const fetchListings = async () => {
       setLoading(true);
+      setShowMore(false);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
+
+      if (data.length > 8) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
+
       setListings(data);
       setLoading(false);
     };
@@ -107,8 +116,22 @@ export default function Search() {
     navigate(`/search?${searchQuery}`);
   };
 
+  const onShowMoreClick = async () => {
+    const numberOfListings = listings.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('startIndex', startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setListings([...listings, ...data]);
+  };
+
   return (
-    <div className="flex flex-col md:flex-row dark:bg-slate-600">
+    <div className="flex flex-col md:flex-row dark:bg-slate-800">
       <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
@@ -210,7 +233,7 @@ export default function Search() {
               <option value="createdAt_asc">Oldest</option>
             </select>
           </div>
-          <button className="dark:bg-slate-800 bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
+          <button className="dark:bg-slate-600 bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
             Search
           </button>
         </form>
@@ -234,6 +257,15 @@ export default function Search() {
             listings.map((listing) => (
               <ListingItem key={listing._id} listing={listing} />
             ))}
+
+            {showMore && (
+            <button
+              onClick={onShowMoreClick}
+              className='text-green-700 hover:underline p-7 text-center w-full'
+            >
+              Show more
+            </button>
+          )}
         </div>
       </div>
     </div>

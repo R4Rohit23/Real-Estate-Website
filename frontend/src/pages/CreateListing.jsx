@@ -177,7 +177,7 @@ function CreateListing() {
   };
 
   return (
-    <div className="dark:bg-slate-600 min-h-screen">
+    <div className="dark:bg-slate-800 min-h-screen">
       <main className="p-4 max-w-4xl mx-auto pt-10">
         <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">
           Create a Listing
@@ -191,7 +191,7 @@ function CreateListing() {
             <input
               type="text"
               placeholder="Name"
-              className="border p-3 rounded-lg shadow-lg"
+              className="border p-3 rounded-lg shadow-lg dark:hover:shadow-slate-950"
               id="name"
               maxLength={"10000"}
               minLength={"10"}
@@ -203,7 +203,7 @@ function CreateListing() {
             <textarea
               type="text"
               placeholder="Description"
-              className="border p-3 rounded-lg shadow-lg"
+              className="border p-3 rounded-lg shadow-lg dark:hover:shadow-slate-950"
               id="description"
               required
               onChange={handleChange}
@@ -213,7 +213,7 @@ function CreateListing() {
             <input
               type="text"
               placeholder="Address"
-              className="border p-3 rounded-lg shadow-lg"
+              className="border p-3 rounded-lg shadow-lg dark:hover:shadow-slate-950"
               id="address"
               required
               onChange={handleChange}
@@ -282,7 +282,7 @@ function CreateListing() {
                   id="bedrooms"
                   min={"1"}
                   max={"10"}
-                  className="p-3 border border-gray-300 rounded-lg shadow-lg"
+                  className="p-3 border border-gray-300 rounded-lg shadow-lg dark:hover:shadow-slate-950"
                   required
                   onChange={handleChange}
                   value={formData.bedrooms}
@@ -295,7 +295,7 @@ function CreateListing() {
                   id="bathrooms"
                   min={"1"}
                   max={"10"}
-                  className="p-3 border border-gray-300 rounded-lg shadow-lg"
+                  className="p-3 border border-gray-300 rounded-lg shadow-lg dark:hover:shadow-slate-950"
                   onChange={handleChange}
                   value={formData.bathrooms}
                   required
@@ -308,7 +308,7 @@ function CreateListing() {
                   id="regularPrice"
                   min={"50"}
                   max={"100000000"}
-                  className="p-3 border border-gray-300 rounded-lg shadow-lg"
+                  className="p-3 border border-gray-300 rounded-lg shadow-lg dark:hover:shadow-slate-950"
                   onChange={handleChange}
                   value={formData.regularPrice}
                   required
@@ -351,7 +351,7 @@ function CreateListing() {
             <div className="flex gap-4">
               <input
                 onChange={(e) => setFiles(e.target.files)}
-                className="p-3 border border-gray-300 rounded w-full shadow-lg"
+                className="p-3 border border-gray-300 rounded w-full shadow-lg dark:text-slate-300"
                 type="file"
                 id="images"
                 accept="image/*"
@@ -361,7 +361,7 @@ function CreateListing() {
                 disabled={uploading}
                 onClick={handleImageUpload}
                 type="button"
-                className="p-3 bg-green-600 text-white rounded uppercase hover:opacity-90 hover:shadow-lg disabled:opacity-80"
+                className="p-3 bg-green-600 text-white rounded uppercase hover:opacity-90 hover:shadow-lg disabled:opacity-80 shadow-lg dark:hover:shadow-slate-950"
               >
                 {uploading ? "Uploading..." : "Upload"}
               </button>
@@ -391,7 +391,7 @@ function CreateListing() {
                 </div>
               ))}
 
-            <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white dark:bg-slate-800 rounded-lg uppercase hover:shadow-lg hover:opacity-90 disabled:opacity-80">
+            <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white dark:bg-slate-700 rounded-lg uppercase shadow-lg hover:opacity-90 dark:hover:shadow-slate-950 disabled:opacity-80">
               {loading ? "Creating..." : "Create Listing"}
             </button>
             {error && <p className="text-red-700 dark:text-red-400">{error}</p>}

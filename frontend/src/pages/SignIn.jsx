@@ -51,7 +51,7 @@ function SignIn() {
   };
 
   return (
-    <div className="min-h-screen dark:bg-slate-600">
+    <div className="min-h-screen dark:bg-slate-800">
       <div className="p-3 max-w-lg mx-auto pt-20">
         <h1 className="text-3xl text-center font-semibold my-7 dark:text-white">
           Sign In
@@ -60,7 +60,7 @@ function SignIn() {
           <input
             type="email"
             placeholder="Email"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg dark:hover:shadow-slate-950 shadow-lg hover:shadow-slate-400"
             id="email"
             onChange={handleChange}
           />
@@ -68,14 +68,14 @@ function SignIn() {
           <input
             type="password"
             placeholder="Password"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg dark:hover:shadow-slate-950 shadow-lg hover:shadow-slate-400"
             id="password"
             onChange={handleChange}
           />
 
           <button
             disabled={loading}
-            className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 dark:bg-slate-800"
+            className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 dark:bg-slate-600 shadow-lg dark:shadow-slate-950"
           >
             {loading ? "Loading..." : "Sign IN"}
           </button>

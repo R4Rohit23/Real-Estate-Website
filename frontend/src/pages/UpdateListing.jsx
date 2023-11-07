@@ -187,7 +187,7 @@ function UpdateListing() {
   };
 
   return (
-    <div className="dark:bg-slate-600">
+    <div className="dark:bg-slate-800">
       <main className="p-4 max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold text-center my-7 dark:text-white">
           Edit Listing
@@ -361,7 +361,7 @@ function UpdateListing() {
             <div className="flex gap-4">
               <input
                 onChange={(e) => setFiles(e.target.files)}
-                className="p-3 border border-gray-300 rounded w-full shadow-lg"
+                className="p-3 border border-gray-300 rounded w-full shadow-lg dark:text-slate-300"
                 type="file"
                 id="images"
                 accept="image/*"
@@ -403,7 +403,7 @@ function UpdateListing() {
 
             <button
               disabled={loading || uploading}
-              className="p-3 bg-slate-700 text-white dark:bg-slate-800 rounded-lg uppercase hover:shadow-lg hover:opacity-90 disabled:opacity-80"
+              className="p-3 bg-slate-700 text-white dark:bg-slate-600 rounded-lg uppercase hover:shadow-lg hover:opacity-90 disabled:opacity-80"
             >
               {loading ? "Updating..." : "Update Listing"}
             </button>
