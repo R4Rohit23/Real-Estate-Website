@@ -2,7 +2,7 @@
 
 A responsive real estate website built using the power of MERN (MongoDB, Express.js, React, Node.js) stack and TailwindCSS.
 
-![Real Estate Website Screenshot](screenshot_main_page.png)
+![Real Estate Website Screenshot](skyline_mainpage.png)
 
 ## Table of Contents
 - [Features](#features)
